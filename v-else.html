@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-else</title>
+</head>
+<body>
+    <div id="app">
+        <!--v-else元素必须立即跟在v-if元素的后面——否则它不能被识别。-->
+        <h6 v-if="age >= 25">Age: {{ age }}</h6>
+        <h6 v-else>Name: {{ name }}</h6>
+        <h6>--------------分割线--------------</h6>
+        <!--v-else-if,2.1.0新增,充当 v-if 的“else-if 块”。可以链式地使用多次：-->
+        <div v-if="type === 'A'">
+        A
+        </div>
+        <div v-else-if="type === 'B'">
+        B
+        </div>
+        <div v-else-if="type === 'C'">
+        C
+        </div>
+        <div v-else>
+        Not A/B/C
+        </div>
+    </div>
+    <script src="js/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                age: 22,
+                name: 'keepfool',
+                sex: 'Male',
+                type:'B'
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-show</title>
+</head>
+<body>
+    <div id="app">
+        <h1 v-show="yes">yes</h1>
+        <h1 v-show="no">no</h1>
+        <h1 v-show="age > 20">age</h1>
+    </div>
+    
+    <script src="js/vue.js"></script>
+    <script>
+        //带有v-show的元素始终会被渲染并且保留在DOM中,只是改变了元素的display值;而v-if则是值为true时才渲染.
+        //如果需要频繁的切换,则使用v-show比较好,如果在运行时条件不太改变,则使用v-if比较好.
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                yes:true,
+                no :false,
+                age:22
+            }
+        })
+    </script>
+</body>
+</html>

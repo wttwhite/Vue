@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-bind</title>
+</head>
+<body>
+    <!--绑定html class
+        可以传给 v-bind:class 一个对象，以动态地切换 class 。
+        上面的语法表示 classactive 的更新将取决于数据属性 isActive 是否为真值 。
+    -->
+    <div class="static"
+        v-bind:class="{ active: isActive, 'text-danger': hasError }">
+    </div>
+    <!--
+        也可以直接绑定数据里的一个对象：
+        <div v-bind:class="classObject"></div>
+        data: {
+            classObject: {
+                active: true,
+                'text-danger': false
+            }
+        }
+    -->
+    <!--也可以在这里绑定返回对象的计算属性。这是一个常用且强大的模式：
+    <div v-bind:class="classObject"></div>
+    data: {
+    isActive: true,
+    error: null
+    },
+    computed: {
+    classObject: function () {
+        return {
+        active: this.isActive && !this.error,
+        'text-danger': this.error && this.error.type === 'fatal',
+        }
+    }
+}-->
+<!--数组语法:v-bind:class="[activeClass, errorClass]"
+    对象语法:v-bind:class="[{ active: isActive }, errorClass]"
+-->
+
+<!--绑定内联样式
+    对象语法:
+    <div v-bind:style="styleObject"></div>
+    data: {
+        styleObject: {
+            color: 'red',
+            fontSize: '13px'
+        }
+    }
+    数组语法:v-bind:style 的数组语法可以将多个样式对象应用到一个元素上：
+    <div v-bind:style="[baseStyles, overridingStyles]">
+    自动添加前缀:当 v-bind:style 使用需要特定前缀的 CSS 属性时，如 transform ，Vue.js 会自动侦测并添加相应的前缀。
+    
+-->
+    <script src="js/vue.js"></script>
+    <script>
+        
+        var vm = new Vue({
+
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/index.css">
+    <title>Demo</title>
+</head>
+<body>
+    <div id="app">
+        <div class="text">
+            <textarea name="" id="" cols="70" rows="5" v-model="newContent"></textarea>
+            <div class="Obtn">
+                <button @click="createContent">记录</button>
+            </div>
+        </div>
+        <div class="list">
+            <ul>
+                <!--强行用了一波v-bind-->
+                <li  v-for="(item, index) in content">
+                    <div :class={"content":true}>{{index+1}} : {{item}}</div>
+                    <div class="del" @click="delContent(index)" >删除</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script src="js/vue.js"></script>
+    <script>
+        var storage=window.localStorage;
+        var storageValue = [];
+        //读取缓存中的每个值,并保存在storageValue数组中
+        for(var i =0,len = storage.length;i<len;i++){
+            var key = storage.key(i);
+            storageValue.push(storage.getItem(key));
+           // console.log(storageValue);
+        }
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                newContent:'',
+                content:storageValue//将读取到的缓存值保存在content中,用于vue的循环读取
+            },
+            methods:{
+                createContent:function(){
+                    if(this.newContent){
+                        //存放数组,用于vue循环界面展示
+                        this.content.push(this.newContent);
+                        //写入缓存
+                        storage.setItem(this.content.length,this.newContent);                       
+                    }                    
+                    this.newContent = '';//添加完后重置newContent
+                },
+                delContent:function(index){
+                    //保存删除的值
+                    var value = this.content.splice(index,1);
+                    console.log(value);
+                    //删除缓存中对应的数值,这个有问题,removeItem参数是key值,而我现在还取不到key值
+                    //缓存中key值与方法传入的index值不同
+                    storage.removeItem(value);
+                }
+            }
+        })
+
+        
+    </script>
+</body>
+</html>

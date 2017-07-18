@@ -1,0 +1,44 @@
+html,body,ul,li{
+    margin:0;
+    padding:0;
+}
+li{
+    list-style-type: none;
+}
+#app{
+    width: 800px;
+    margin: 100px auto;
+}
+.text textarea{
+    margin: 10px 145px;
+}
+.text .Obtn button{
+    width: 500px;
+    height: 50px;
+    background-color: #ccc;
+    font-size:16px;
+    margin: 10px 150px;
+}
+.list{
+    margin-top:20px;
+}
+.list li{
+    width: 800px;
+    height: 50px;
+}
+.list li .content{
+    margin-left:100px;
+    float: left;
+}
+.list li .del{
+    width: 50px;
+    height: 30px;
+    background-color: #ddd;
+    text-align: center;
+    line-height: 30px;
+    float: right;
+    margin-right: 100px;
+}
+.delect{
+    text-decoration: line-through;
+}
