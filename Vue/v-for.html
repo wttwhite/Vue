@@ -7,6 +7,75 @@
     <title>v-for</title>
 </head>
 <body>
-   
+    <div id="app">
+        <!--基本用法:第二个可选参数为当前的索引-->
+        <div v-for="(item, index) in people">
+           {{index}}:{{item.name}}-{{item.age}}
+        </div>
+        <!--对象迭代:也可以用 v-for 通过一个对象的属性来迭代。-->
+        <div v-for="(value, key, index) in object">
+            {{index}}. {{key}} : {{value}}
+        </div>
+        <!--同v-if模板,也可以用带有v-for的<template>标签来渲染多个元素块。-->
+        <div v-for="n in even(numbers)">{{n}}</div>
+    </div>
+    <script src="js/vue.js"></script>
+    <script>
+        //v-for在组件中的运用之后再进行说明
+        //当v-for和v-if处于同一节点， v-for 的优先级比 v-if 更高，这意味着 v-if 将分别重复运行于每个 v-for 循环中。当你想为仅有的 一些 项渲染节点时，这种优先级的机制会十分有用
+       var vm = new Vue({
+           el:"#app",
+           data:{
+               people:[{
+                   name:'Yessenia',
+                   age:10
+               },{
+                   name:'Veronica',
+                   age:20
+               },{
+                   name:'Scarlett',
+                   age:15
+               }],
+                object:{
+                    name:'kimi',
+                    age:5
+                },
+                numbers: [ 1, 2, 3, 4, 5 ]
+           },
+            methods: {
+                even: function (numbers) {
+                    return numbers.filter(function (number) {
+                    return number % 2 === 0
+                    })
+                }
+            }
+
+       })
+
+//数组更新检测:
+//变异方法:会改变被这些方法调用的原始数组,触发视图更新
+//push() vm.people.push({name:'222',age:5})
+//pop()
+///shift()
+//unshift()
+//splice()
+//sort()
+//reverse()
+//非变异方法:不会改变原始数组，但总是返回一个新数组当使用非变异方法时，可以用新数组替换旧数组：
+// example1.items = example1.items.filter(function (item) {
+//   return item.message.match(/Foo/)
+// })
+//注意事项:
+      // 由于 JavaScript 的限制， Vue 不能检测以下变动的数组：
+    //当你利用索引直接设置一个项时，例如： vm.items[indexOfItem] = newValue
+    //当你修改数组的长度时，例如： vm.items.length = newLength
+    //为了解决第一类问题，以下两种方式都可以实现和 vm.items[indexOfItem] = newValue 相同的效果， 同时也将触发状态更新：
+    // Vue.set
+    //Vue.set(example1.items, indexOfItem, newValue)
+    // Array.prototype.splice
+    //example1.items.splice(indexOfItem, 1, newValue)
+    //为了解决第二类问题，你可以使用 splice：
+    //example1.items.splice(newLength)
+    </script>
 </body>
 </html>
