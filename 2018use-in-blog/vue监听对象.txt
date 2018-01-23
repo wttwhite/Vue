@@ -1,0 +1,31 @@
+1.一般的监听
+传进来一个 nodeId
+watch: {
+      nodeId(n, o) {
+        this.nodeId = n
+      }
+    },
+
+2.监听一个对象
+watch: {
+      node: {
+        handler (n, o) {
+          console.log(n)
+        },
+        deep: true
+      }
+    },
+
+3.监听对象里面的一个属性
+computed做中间层
+
+computed: {
+      nodeLabel () {
+        return this.node.label
+      }
+    },
+    watch: {
+      nodeLabel (n, o) {
+        this.ruleForm.prevNode = n
+      }
+    },
